@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Detection Clicbaits</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="box-content">
+      <nav class="navbar navbar-expand-md bg-dark">
+        <div class="container" style="max-width: 750px;">
+          <a class="navbar-brand" href="index.html" id="judul">Clickbaits Detection</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item" style="border-right: 1px solid #bbb; border-left: 1px solid #bbb;">
+                <a href="#" class="nav-link" id="nav">Home</a>
+              </li>
+              <li class="nav-item" style="border-right: 1px solid #bbb;">
+                <a href="about.html" class="nav-link" id="nav">About</a>
+              </li>
+            </ul>
+        </div>
+        </div>
+      </nav>
+      <br>
+      <br>
+      <div class="row">
+        <div class="col-md-4 text-right">
+          <h4 class="subtitle">Masukkan Judul</h4>
+          <h4 class="subtitle" style="margin-top: 55px;">Masukkan Isi</h4>
+        </div>
+        <div class="col-md-8">
+          <form>
+            <div class="form-group">
+              <input type="text" name="" class="form-control" style="width: 65%; font-family: helvitica;" id="memo1" placeholder="Masukkan Judul">
+              <small style="color: #FFF; font-style: italic;">Masukkan Judul Berita</small>
+            </div>
+            <div class="form-group">
+              <textarea  name="" class="form-control" style="width: 65%; font-family: helvitica;" rows="4" id="memo2"></textarea>
+              <small style="color: #FFF; font-style: italic;">Masukkan Isi Berita</small>
+            </div>
+          </form>
+          <br>
+          <button class="btn btn-dark" id="button1">Detection</button>
+          <br>
+          <br>
+          <div class="row">
+            <div class="col-md-4">
+              <label style="color: #FFF; font-family: helvetica; font-size: 15px;">Terdeteksi : <label id="result1"></label></label>
+            </div>
+            <div class="col-md-4">
+              <label style="color: #FFF; font-family: helvetica; font-size: 15px;">Hasil Persentase : <label id="result2"></label>%</label>
+            </div>
+          </div>
+          <br>
+          <br>
+		</div>
+      </div>
+      <div class="box text-center bg-dark">
+        <label class="copyright">
+          Copyright 2018
+        </label>
+      </div>
+    </div>
+    </div>
+    <script type ="text/javascript" src ="bootstrap/jquery/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#button1').click(function(e) {
+          e.preventDefault();
+          $.post(
+            'http://localhost:5000/check_single',
+            {'judul': $('#memo1').val(), 'isi': $('#memo2').val()},
+            function(data, resp) {
+              $('#result1').html(data.status);
+              $('#result2').html(data.procentage);
+            });
+        });
+      });
+    </script>
+</body>
+</html>
